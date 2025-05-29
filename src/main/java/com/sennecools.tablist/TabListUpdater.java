@@ -25,7 +25,7 @@ package com.sennecools.tablist;
                  * @param event The post-tick event containing the server tick info.
                  */
                 @SubscribeEvent
-                public void onServerTick(ServerTickEvent.Post event) {
+                public void onServerTick(ServerTickEvent.Post event) throws Exception {
                     MinecraftServer server = event.getServer();
                     if (server == null) return;
 
@@ -51,10 +51,15 @@ package com.sennecools.tablist;
                             player.connection.send(new ClientboundTabListPacket(Component.literal(newHeader), Component.literal(newFooter)));
                         }
 
-                        // Update the player's display name with their rank
-                        String playerNameWithRank = TabListVariables.getPlayerRank(player) + " " + player.getName().getString();
-                        player.setCustomName(Component.literal(playerNameWithRank));
-                        player.connection.send(new ClientboundPlayerInfoUpdatePacket(ClientboundPlayerInfoUpdatePacket.Action.UPDATE_DISPLAY_NAME, player));
+//                        // Update the player's display name with their rank
+//                        // Throws Exception when FTB Ranks is not installed (Optional Dependency)
+//                        try {
+//                            String playerNameWithRank = TabListVariables.getPlayerRank(player) + " " + player.getName().getString();
+//                            player.setCustomName(Component.literal(playerNameWithRank));
+//                            player.connection.send(new ClientboundPlayerInfoUpdatePacket(ClientboundPlayerInfoUpdatePacket.Action.UPDATE_DISPLAY_NAME, player));
+//                        } catch (java.lang.Exception e) {
+//                            throw new Exception("Could not update the Ranks of a Player. This could have happened because FTB Ranks is not installed.");
+//                        }
                     }
                 }
             }

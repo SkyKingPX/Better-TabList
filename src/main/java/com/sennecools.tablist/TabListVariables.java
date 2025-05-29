@@ -1,6 +1,5 @@
 package com.sennecools.tablist;
 
-import dev.ftb.mods.ftbranks.api.Rank;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
@@ -8,8 +7,6 @@ import net.neoforged.neoforge.server.ServerLifecycleHooks;
 import java.lang.management.ManagementFactory;
 import java.util.HashMap;
 import java.util.Map;
-
-import static dev.ftb.mods.ftbranks.impl.FTBRanksAPIImpl.manager;
 
 /**
  * Provides utility methods to process tab list templates by replacing placeholders
@@ -36,7 +33,7 @@ public class TabListVariables {
         placeholders.put("#MEMORY", getMemoryUsage());
         placeholders.put("#UPTIME", getServerUptime());
         placeholders.put("#PING", String.valueOf(getPlayerPing(player)));
-        placeholders.put("#PLAYERRANK", getPlayerRank(player));
+//        placeholders.put("#PLAYERRANK", getPlayerRank(player));
         placeholders.put("#N", "\n");
 
         // Replace each placeholder in the template with its corresponding value.
@@ -121,14 +118,18 @@ public class TabListVariables {
      * @param player The player whose rank is to be retrieved.
      * @return The player's rank as a string.
      */
-    static String getPlayerRank(ServerPlayer player) {
-        for (Rank rank : manager.getRanks(player)) {
-            if (!rank.getName().equalsIgnoreCase("default")) {
-                return rank.getName();
-            }
-        }
-        return "No Rank"; // Default return value if no rank is found
-    }
+//    static String getPlayerRank(ServerPlayer player) {
+//        try {
+//            for (Rank rank : manager.getRanks(player)) {
+//                if (!rank.getName().equalsIgnoreCase("default")) {
+//                    return rank.getName();
+//                }
+//            }
+//        } catch (Exception e){
+//            return "No Rank";
+//        }
+//        return "No Rank"; // Default return value if no rank is found
+//    }
 
     /**
      * Converts Minecraft-style color codes (using '&') to the section symbol '§'.
